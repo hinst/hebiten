@@ -72,6 +72,7 @@ func (this *TDraw) CheckVisibility() (result bool) {
 	var imageRect = this.GetRect()
 	var destinationRect TFloatRect
 	destinationRect.LoadImage(this.Target)
+	destinationRect = destinationRect.GetEnlarged(1)
 	for _, point := range imageRect.GetPoints() {
 		if destinationRect.CheckContainsPoint(point) {
 			result = true

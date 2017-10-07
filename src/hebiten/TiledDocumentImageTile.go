@@ -1,5 +1,5 @@
 package hebiten
 
 type TTiledDocumentImageTile struct {
-	Image string
+	Image string `json:"image"`
 }

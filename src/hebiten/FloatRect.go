@@ -49,3 +49,12 @@ func (this *TFloatRect) LoadImage(image *ebiten.Image) *TFloatRect {
 	this.H = float64(h)
 	return this
 }
+
+func (this *TFloatRect) GetEnlarged(delta float64) TFloatRect {
+	return TFloatRect{
+		X: this.X - delta,
+		Y: this.Y + delta,
+		W: this.W + 2*delta,
+		H: this.H + 2*delta,
+	}
+}

@@ -26,7 +26,7 @@ func (this Int2) ToString() string {
 	return hgo.IntToStr(this.X) + "," + hgo.IntToStr(this.Y)
 }
 
-func (this Int2) GetProd(multiplier int) BigFloat2 {
+func (this Int2) GetProductByInt(multiplier int) BigFloat2 {
 	var m = float64(multiplier)
 	return BigFloat2{X: float64(this.X) * m, Y: float64(this.Y) * m}
 }
@@ -86,4 +86,10 @@ func (this Int2) Add(a Int2) Int2 {
 func (this Int2) MoveByDirection(direction Direction) (result Int2) {
 	result = this.Add(Int2{}.GetFromDirection(direction))
 	return
+}
+
+// Check pos is a valid position in 2D array of size = this
+func (this Int2) CheckInRange(pos Int2) bool {
+	return 0 <= pos.X && pos.X < this.X &&
+		0 <= pos.Y && pos.Y < this.Y
 }

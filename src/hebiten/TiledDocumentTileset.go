@@ -3,7 +3,7 @@ package hebiten
 import "hgo"
 
 type TTiledDocumentTileset struct {
-	Tiles map[string]TTiledDocumentImageTile
+	Tiles map[string]TTiledDocumentImageTile `json:"tiles"`
 }
 
 func (this *TTiledDocumentTileset) ToMap() (result map[int]string) {

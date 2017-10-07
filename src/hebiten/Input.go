@@ -11,7 +11,7 @@ var DirectionKeys = []ebiten.Key{
 	ebiten.KeyRight,
 }
 
-var Keys = append(DirectionKeys, []ebiten.Key{}...)
+var Keys = append(DirectionKeys, []ebiten.Key{ebiten.KeyI, ebiten.KeyEscape, ebiten.KeyPageUp, ebiten.KeyPageDown}...)
 
 type TInput struct {
 	Keys      map[ebiten.Key]KeyStatus
@@ -59,6 +59,11 @@ func (this *TInput) UpdateKeys(deltaTime float64) {
 		value.Pressed = pressed
 		this.Keys[key] = value
 	}
+}
+
+func (this *TInput) CheckKeyPressed(key ebiten.Key) bool {
+	var keyData = this.Keys[key]
+	return keyData.Pressed && keyData.TimeSincePressed == 0
 }
 
 func GetDirectionFromKey(key ebiten.Key) (result Direction) {

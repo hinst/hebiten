@@ -23,11 +23,13 @@ func (this *TTiledData) Read() (result bool) {
 func (this *TTiledData) readTiles() {
 	if this.TilesFilePath != "" {
 		this.WriteLog("Now loading tiles from '" + this.TilesFilePath + "'")
-		var data, readFileResult = ioutil.ReadFile(this.FilePath)
+		var data, readFileResult = ioutil.ReadFile(this.TilesFilePath)
 		AssertResult(readFileResult)
 		var tileObject = &TTiledDocumentTileset{}
 		AssertResult(json.Unmarshal(data, tileObject))
-		this.WriteLog("Number of tile objects: " + IntToStr(len(tileObject.Tiles)))
+		if false {
+			this.WriteLog("Number of tile objects: " + IntToStr(len(tileObject.Tiles)))
+		}
 		this.Tiles = tileObject.ToMap()
 		this.WriteLog("Number of tiles: " + IntToStr(len(this.Tiles)))
 	}

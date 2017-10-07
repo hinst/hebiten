@@ -1,7 +1,6 @@
 package hebiten
 
 import (
-	. "hgo"
 	"path/filepath"
 )
 
@@ -38,9 +37,9 @@ func (this *TTiledData) GetLayer(name string) (result *TTiledDocumentLayer) {
 }
 
 func (this *TTiledData) GetTileImageFullName(id int) (result string) {
-	var tile, found = this.Data.Tilesets[0].Tiles[IntToStr(id)]
+	var tile, found = this.Tiles[id]
 	if found {
-		result = tile.Image
+		result = tile
 	}
 	return
 }
