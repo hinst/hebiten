@@ -6,19 +6,20 @@ import (
 )
 
 type TTiledData struct {
-	Data     TTiledDocumentRoot
-	Ground   TIntArray2d
-	Objects  TIntArray2d
-	Markers  TIntArray2d
-	FilePath string
-	WriteLog func(s string)
-	Tiles    map[int]string
-
+	Data          TTiledDocumentRoot
+	Ground        TIntArray2d
+	Objects       TIntArray2d
+	Markers       TIntArray2d
+	FilePath      string
 	TilesFilePath string
+	WriteLog      func(s string)
+	Tiles         map[int]string
 }
 
 func (this *TTiledData) Create() *TTiledData {
-	this.WriteLog = func(s string) {}
+	if nil == this.WriteLog {
+		this.WriteLog = func(s string) {}
+	}
 	return this
 }
 
