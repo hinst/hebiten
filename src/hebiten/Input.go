@@ -11,12 +11,12 @@ var DirectionKeys = []ebiten.Key{
 	ebiten.KeyRight,
 }
 
-var Keys = append(DirectionKeys, []ebiten.Key{ebiten.KeyI, ebiten.KeyEscape, ebiten.KeyPageUp, ebiten.KeyPageDown}...)
+var Keys = append(DirectionKeys, []ebiten.Key{ebiten.KeyEnter, ebiten.KeyEscape, ebiten.KeyPageUp, ebiten.KeyPageDown,
+	ebiten.KeyI, ebiten.KeyS, ebiten.KeyT}...)
 
 type TInput struct {
-	Keys      map[ebiten.Key]KeyStatus
-	OnClick   func(position Int2)
-	OnKeyDown func(key ebiten.Key)
+	Keys    map[ebiten.Key]KeyStatus
+	OnClick func(position Int2)
 
 	PreviousLeftMouseButtonStatus bool
 }
@@ -49,7 +49,6 @@ func (this *TInput) UpdateKeys(deltaTime float64) {
 		if pressed {
 			if !value.Pressed {
 				value.TimeSincePressed = 0
-				this.OnKeyDown(key)
 			} else {
 				value.TimeSincePressed += deltaTime
 			}

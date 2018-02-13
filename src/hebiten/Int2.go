@@ -93,3 +93,7 @@ func (this Int2) CheckInRange(pos Int2) bool {
 	return 0 <= pos.X && pos.X < this.X &&
 		0 <= pos.Y && pos.Y < this.Y
 }
+
+func (this Int2) CheckIf0() bool {
+	return this.X == 0 && this.Y == 0
+}

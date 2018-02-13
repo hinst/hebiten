@@ -2,47 +2,70 @@ package hebiten
 
 import (
 	"hgo"
+	"runtime/debug"
 
 	"github.com/hajimehoshi/ebiten"
 )
 
 type TDraw struct {
-	Target, Image *ebiten.Image
-	ImageSize     BigFloat2
-	Position      BigFloat2
-	Angle         float64
-	Origin        BigFloat2
-	Size          BigFloat2
-	Scale         BigFloat2
-	CenterOrigin  bool
-	Mask          TFloatColor
+	Target       *ebiten.Image
+	Image        *ebiten.Image
+	AtlasTexture AtlasTexture
+	Position     BigFloat2
+	Angle        float64
+	Origin       BigFloat2
+	Size         BigFloat2
+	Scale        BigFloat2
+	CenterOrigin bool
+	Mask         TFloatColor
 }
 
 var GlobalDrawNumber int
+var DebugImage *ebiten.Image
+var DebugImageModeEnabled bool
 
 func (this *TDraw) GetImageSize() BigFloat2 {
 	var w, h = this.Image.Size()
 	return BigFloat2{float64(w), float64(h)}
 }
 
-func (this *TDraw) InferScale() {
-	this.Scale.X = this.Size.X / this.ImageSize.X
-	this.Scale.Y = this.Size.Y / this.ImageSize.Y
+func (this *TDraw) InferScale(imageSize BigFloat2) {
+	this.Scale.X = this.Size.X / imageSize.X
+	this.Scale.Y = this.Size.Y / imageSize.Y
 }
 
 func (this *TDraw) Draw() {
-	hgo.Assert(this.Image != nil)
-	this.ImageSize = this.GetImageSize()
-	if this.Scale.Check0() {
-		this.InferScale()
+	var o = &ebiten.DrawImageOptions{}
+	var imageSize BigFloat2
+	if this.AtlasTexture.Exists() {
+		this.Image = this.AtlasTexture.Image
+		imageSize = this.AtlasTexture.Rect.GetSize().ToBigFloat()
+		var imageRect = this.AtlasTexture.Rect.ToImageRect()
+		o.SourceRect = &imageRect
+		if false {
+			println(GlobalIntRect.ImageRectToStr(*o.SourceRect))
+			var w, h = this.Image.Size()
+			o.SourceRect.Min.X = 0
+			o.SourceRect.Min.Y = 0
+			o.SourceRect.Max.X = w
+			o.SourceRect.Max.Y = h
+		}
+	} else {
+		hgo.Assert(this.Image != nil)
+		imageSize = this.GetImageSize()
+		if false {
+			println(string(debug.Stack()))
+		}
 	}
-	var halfW = this.ImageSize.X / 2
-	var halfH = this.ImageSize.Y / 2
+	if this.Scale.Check0() {
+		this.InferScale(imageSize)
+	}
+	var halfW = imageSize.X / 2
+	var halfH = imageSize.Y / 2
 	if this.CenterOrigin {
 		this.Origin.X = halfW
 		this.Origin.Y = halfH
 	}
-	var o = &ebiten.DrawImageOptions{}
 	o.GeoM.Translate(-halfW, -halfH)
 	o.GeoM.Rotate(this.Angle)
 	o.GeoM.Translate(halfW, halfH)
@@ -55,7 +78,11 @@ func (this *TDraw) Draw() {
 		o.ColorM.Scale(this.Mask.R, this.Mask.G, this.Mask.B, this.Mask.A)
 	}
 	if this.CheckVisibility() {
-		this.Target.DrawImage(this.Image, o)
+		if DebugImageModeEnabled {
+			this.Target.DrawImage(DebugImage, o)
+		} else {
+			this.Target.DrawImage(this.Image, o)
+		}
 		GlobalDrawNumber++
 	}
 }
