@@ -3,11 +3,15 @@
 Utils for "ebiten" 2D graphics engine for Go programming language.
 
 * Math
-    * Int2 {X, Y}
-    * BigFloat2 {X, Y}
-    * IntRect {X, Y, W, H}
+    * Int2 {X Y}
+    * BigFloat2 {X Y}
+    * IntRect {X Y W H}
+    * FloatRect {X Y W H}
+    * TFloatColor {R G B A}
 * Graphics
     * Draw
     * DrawTexts
     * TextureAtlas
 * Reader for "Tiled" map editor data file
+    * TiledData
+    * TiledDataLoaders

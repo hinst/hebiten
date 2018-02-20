@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 
 	"github.com/golang/freetype/truetype"
+	"golang.org/x/image/font"
 )
 
 func LoadFont(filePath string) (result struct {
@@ -22,4 +23,8 @@ func LoadFont(filePath string) (result struct {
 		result.Result = fileResult
 	}
 	return
+}
+
+func GetFontLineHeight(fontFace font.Face, screenDensity float64) float64 {
+	return float64(fontFace.Metrics().Height)/screenDensity + 1
 }

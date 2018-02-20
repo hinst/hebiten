@@ -51,7 +51,7 @@ func (this *TDraw) Draw() {
 			o.SourceRect.Max.Y = h
 		}
 	} else {
-		hgo.Assert(this.Image != nil)
+		hgo.AssertWT(this.Image != nil, func() string { return "this.Image field is nil" })
 		imageSize = this.GetImageSize()
 		if false {
 			println(string(debug.Stack()))
@@ -107,4 +107,11 @@ func (this *TDraw) CheckVisibility() (result bool) {
 		}
 	}
 	return
+}
+
+func (this *TDraw) SetPosRect(rect TFloatRect) {
+	this.Position.X = rect.X
+	this.Position.Y = rect.Y
+	this.Size.X = rect.W
+	this.Size.Y = rect.H
 }
