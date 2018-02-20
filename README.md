@@ -19,3 +19,5 @@ Requirements:
 * Reader for "Tiled" map editor data file
     * TiledData
     * TiledDataLoaders
+* HealthBar class
+    * BaseHealth, CurrentHealth, Texture, Color
