@@ -36,7 +36,10 @@ func (this *DrawTexts) Add(item DrawText) {
 }
 
 func (this *DrawTexts) Draw() {
-	for _, drawText := range this.List {
+	for i, drawText := range this.List {
+		if this.count <= i {
+			break
+		}
 		ebiten_text.Draw(this.Target, drawText.Text, this.Font, drawText.X, drawText.Y, drawText.Color)
 		GlobalDrawNumber++
 	}
