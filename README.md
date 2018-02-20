@@ -1,7 +1,10 @@
 # hebiten
 
 Utils for "ebiten" 2D graphics engine for Go programming language.
-Requires hinst/hgo package: https://github.com/hinst/hgo .
+
+Requirements:
+* ebiten 2D graphics engine package https://github.com/hajimehoshi/ebiten
+* my hinst/hgo package: https://github.com/hinst/hgo
 
 * Math
     * Int2 {X Y}
