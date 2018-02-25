@@ -48,3 +48,7 @@ func (this *TIntRect) ImageRectToStr(rect image.Rectangle) string {
 func (this *TIntRect) GetSize() Int2 {
 	return Int2{X: this.W, Y: this.H}
 }
+
+func (this *TIntRect) CheckEquals(a *TIntRect) bool {
+	return this.X == a.X && this.Y == a.Y && this.W == a.W && this.H == a.H
+}
