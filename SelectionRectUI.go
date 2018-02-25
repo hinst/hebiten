@@ -38,3 +38,15 @@ func (this *SelectionRectUI) Draw(rect TFloatRect) {
 func (this *SelectionRectUI) Update(deltaTime float64) {
 	this.Pendulum.Update(deltaTime)
 }
+
+func (this *SelectionRectUI) SetTarget(v *ebiten.Image) {
+	if this.Target != v {
+		this.Target = v
+	}
+}
+
+func (this *SelectionRectUI) SetBackgroundImage(v AtlasTexture) {
+	if false == this.BackgroundImage.CheckEquals(v) {
+		this.BackgroundImage = v
+	}
+}
