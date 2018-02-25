@@ -12,3 +12,7 @@ type AtlasTexture struct {
 func (this AtlasTexture) Exists() bool {
 	return this.Image != nil
 }
+
+func (this AtlasTexture) CheckEquals(v AtlasTexture) bool {
+	return this.Image == v.Image && this.Rect.CheckEquals(&v.Rect)
+}
