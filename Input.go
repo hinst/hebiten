@@ -12,7 +12,7 @@ var DirectionKeys = []ebiten.Key{
 }
 
 var Keys = append(DirectionKeys, []ebiten.Key{ebiten.KeyEnter, ebiten.KeyEscape, ebiten.KeyPageUp, ebiten.KeyPageDown,
-	ebiten.KeyI, ebiten.KeyS, ebiten.KeyT}...)
+	ebiten.KeyE, ebiten.KeyI, ebiten.KeyS, ebiten.KeyT}...)
 
 type TInput struct {
 	Keys    map[ebiten.Key]KeyStatus

@@ -2,11 +2,11 @@
 
 Utils for "ebiten" 2D graphics engine for Go programming language.
 
-##Requirements:
+## Requirements:
 * ebiten 2D graphics engine package https://github.com/hajimehoshi/ebiten
 * my hinst/hgo package: https://github.com/hinst/hgo
 
-##Overview:
+## Overview:
 * Math
     * Int2 {X Y}
     * BigFloat2 {X Y}
