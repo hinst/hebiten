@@ -12,6 +12,11 @@ func (this *TFloatRect) GetLT() BigFloat2 {
 	return BigFloat2{this.X, this.Y}
 }
 
+func (this *TFloatRect) SetLeftTopPoint(a BigFloat2) {
+	this.X = a.X
+	this.Y = a.Y
+}
+
 func (this *TFloatRect) GetRT() BigFloat2 {
 	return BigFloat2{this.GetRight(), this.Y}
 }
