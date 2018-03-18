@@ -36,3 +36,19 @@ func (this Pager) FollowPage(pageIndex, itemIndex int) int {
 	var newItemIndex = hgo.LockIntBetween(pageRange.X, itemIndex, pageRange.Y)
 	return newItemIndex
 }
+
+func (this Pager) FlipPage(pageIndex int, delta int) int {
+	return this.ConstrainPage(pageIndex + delta)
+}
+
+func (this Pager) ConstrainPage(pageIndex int) int {
+	return hgo.LockIntBetween(0, pageIndex, this.CountOfPages())
+}
+
+func (this Pager) MoveSelection(selectedItemIndex int, delta int) int {
+	return this.ConstrainSelection(selectedItemIndex + delta)
+}
+
+func (this Pager) ConstrainSelection(selectedItemIndex int) int {
+	return hgo.LockIntBetween(0, selectedItemIndex, this.Count)
+}
