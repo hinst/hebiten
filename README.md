@@ -2,6 +2,8 @@
 
 Utils for "ebiten" 2D graphics engine for Go programming language.
 
+Update 2023: this library is now outdated. It was originally created for an old version of EbitenEngine. I am now archiving this repository
+
 ## Requirements:
 * ebiten 2D graphics engine package https://github.com/hajimehoshi/ebiten
 * my hinst/hgo package: https://github.com/hinst/hgo
